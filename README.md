@@ -13,3 +13,9 @@ Coming soon
 ## Documentation
 
 Module documentation is [published on Pursuit](http://pursuit.purescript.org/packages/purescript-web-resize-observer).
+
+## Example
+
+You can see a simple example
+[here](https://nsaunders.dev/purescript-web-resize-observer/example). Or, to
+build it yourself, just run `npm run-script example`.
