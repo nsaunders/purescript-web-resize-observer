@@ -1,0 +1,43 @@
+name: CI
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: purescript-contrib/setup-purescript@main
+
+      - uses: actions/setup-node@v1
+        with:
+          node-version: "10"
+
+      - name: Install dependencies
+        run: |
+          npm install -g bower
+          npm install
+          bower install --production
+
+      - name: Build source
+        run: npm run-script build
+
+      - name: Install dev dependencies
+        run: bower install
+
+      - name: Run tests
+        run: npm run-script test --if-present
+
+      - name: Build example
+        run: npm run-script example
+
+      - name: Publish example
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./public
