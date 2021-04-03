@@ -1,4 +1,4 @@
-module Web.ResizeObserver where
+module Web.ResizeObserver (ResizeObserver, ResizeObserverBoxOptions(..), resizeObserver, observe, unobserve, disconnect) where
 
 import Prelude
 import Control.Alt ((<|>))
