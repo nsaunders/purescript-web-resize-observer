@@ -30516,17 +30516,10 @@ module.exports = {
     BorderBox: BorderBox,
     ContentBox: ContentBox,
     DevicePixelContentBox: DevicePixelContentBox,
-    printBoxOption: printBoxOption,
-    cmapEffectFn2Arg0: cmapEffectFn2Arg0,
-    normalizeEntry: normalizeEntry,
-    resizeObserver: resizeObserver,
-    observe: observe,
-    unobserve: unobserve,
     disconnect: disconnect,
-    "_resizeObserver": $foreign["_resizeObserver"],
-    "_observe": $foreign["_observe"],
-    "_unobserve": $foreign["_unobserve"],
-    "_disconnect": $foreign["_disconnect"]
+    observe: observe,
+    resizeObserver: resizeObserver,
+    unobserve: unobserve
 };
 
 },{"../Control.Alt/index.js":1,"../Control.Applicative/index.js":3,"../Control.Apply/index.js":5,"../Control.Bind/index.js":7,"../Control.Monad.Except.Trans/index.js":15,"../Control.Monad.Except/index.js":16,"../Data.Array/index.js":33,"../Data.Either/index.js":42,"../Data.Function/index.js":54,"../Data.Functor/index.js":61,"../Data.Identity/index.js":67,"../Data.List.Types/index.js":72,"../Data.Symbol/index.js":110,"../Data.Traversable/index.js":114,"../Effect.Uncurried/index.js":130,"../Foreign.Index/index.js":135,"../Foreign/index.js":137,"../Record/index.js":148,"./foreign.js":300}],302:[function(require,module,exports){
