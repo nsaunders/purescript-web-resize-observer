@@ -17,4 +17,4 @@ Module documentation is [published on Pursuit](http://pursuit.purescript.org/pac
 
 ## Example
 
-You can see a simple example [here](https://nsaunders.dev/purescript-web-resize-observer/example) ([source](example/Basic.purs)). Or, to build it yourself, just run `npm run-script example`.
+You can see a simple example [here](https://nsaunders.dev/purescript-web-resize-observer/example) ([source](example/Main.purs)). Or, to build it yourself, just run `npm run-script example`.
