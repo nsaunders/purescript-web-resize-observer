@@ -4,3 +4,6 @@
 /output/
 /generated-docs/
 /public/example.js
+/.purs-repl
+/.spago/
+/yarn.lock

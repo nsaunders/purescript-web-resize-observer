@@ -15,17 +15,17 @@
     "package.json"
   ],
   "devDependencies": {
-    "purescript-console": "^5.0.0",
-    "purescript-web-html": "^3.0.1"
+    "purescript-console": "^6.0.0",
+    "purescript-web-html": "^4.1.0"
   },
   "dependencies": {
-    "purescript-foreign": "^6.0.0",
-    "purescript-web-dom": "^5.0.0",
-    "purescript-record": "^3.0.0",
-    "purescript-foldable-traversable": "^5.0.0",
-    "purescript-either": "^5.0.0",
-    "purescript-arrays": "^6.0.0",
-    "purescript-transformers": "^5.0.0",
-    "purescript-control": "^5.0.0"
+    "purescript-foreign": "^7.0.0",
+    "purescript-web-dom": "^6.0.0",
+    "purescript-record": "^4.0.0",
+    "purescript-foldable-traversable": "^6.0.0",
+    "purescript-either": "^6.1.0",
+    "purescript-arrays": "^7.1.0",
+    "purescript-transformers": "^6.0.0",
+    "purescript-control": "^6.0.0"
   }
 }

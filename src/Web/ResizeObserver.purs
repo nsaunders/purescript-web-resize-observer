@@ -5,7 +5,6 @@ import Control.Alt ((<|>))
 import Control.Monad.Except (runExcept)
 import Data.Array (singleton) as A
 import Data.Either (fromRight)
-import Data.Symbol (SProxy(..))
 import Data.Traversable (traverse)
 import Effect (Effect)
 import Effect.Uncurried (EffectFn1, EffectFn2, EffectFn3, mkEffectFn2, runEffectFn1, runEffectFn2, runEffectFn3)
@@ -13,7 +12,9 @@ import Foreign (Foreign, readArray, readNumber)
 import Foreign.Index (readProp)
 import Prim.Row (class Union, class Nub)
 import Record (merge, modify)
+import Type.Proxy (Proxy(..))
 import Web.DOM (Element)
+import Web.DOM.Element (DOMRect)
 
 data ResizeObserverBoxOptions
   = BorderBox
@@ -27,17 +28,6 @@ printBoxOption = case _ of
   DevicePixelContentBox -> "device-pixel-content-box"
 
 type ResizeObserverOptions = (box :: ResizeObserverBoxOptions)
-
-type DOMRect =
-  { bottom :: Number
-  , height :: Number
-  , left :: Number
-  , right :: Number
-  , top :: Number
-  , width :: Number
-  , x :: Number
-  , y :: Number
-  }
 
 type ResizeObserverSize =
   { blockSize :: Number
@@ -104,7 +94,7 @@ observe
   -> Effect Unit
 observe element =
   runEffectFn3 _observe element
-    <<< modify (SProxy :: SProxy "box") printBoxOption
+    <<< modify (Proxy :: Proxy "box") printBoxOption
     <<< flip merge { box: ContentBox }
 
 foreign import _observe
