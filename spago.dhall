@@ -1,4 +1,6 @@
 { name = "web-resize-observer"
+, license = "MIT"
+, repository = "https://github.com/nsaunders/purescript-web-resize-observer"
 , dependencies =
   [ "arrays"
   , "console"
