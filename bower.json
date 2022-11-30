@@ -1,0 +1,29 @@
+{
+    "name": "purescript-web-resize-observer",
+    "license": [
+        "MIT"
+    ],
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/nsaunders/purescript-web-resize-observer"
+    },
+    "ignore": [
+        "**/.*",
+        "node_modules",
+        "bower_components",
+        "output"
+    ],
+    "dependencies": {
+        "purescript-arrays": "^v7.1.0",
+        "purescript-console": "^v6.0.0",
+        "purescript-control": "^v6.0.0",
+        "purescript-effect": "^v4.0.0",
+        "purescript-either": "^v6.1.0",
+        "purescript-foldable-traversable": "^v6.0.0",
+        "purescript-foreign": "^v7.0.0",
+        "purescript-prelude": "^v6.0.1",
+        "purescript-record": "^v4.0.0",
+        "purescript-transformers": "^v6.0.0",
+        "purescript-web-dom": "^v6.0.0"
+    }
+}
