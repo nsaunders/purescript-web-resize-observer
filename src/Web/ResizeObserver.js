@@ -1,18 +1,17 @@
 "use strict";
 
-exports._resizeObserver = function (callback) {
+export function _resizeObserver(callback) {
   return new ResizeObserver(callback);
 };
 
-exports._observe = function (element, options, observer) {
+export function _observe(element, options, observer) {
   observer.observe(element, options);
 };
 
-exports._unobserve = function (element, observer) {
+export function _unobserve(element, observer) {
   observer.unobserve(element);
 };
 
-exports._disconnect = function (observer) {
+export function _disconnect(observer) {
   return observer.disconnect();
 };
-

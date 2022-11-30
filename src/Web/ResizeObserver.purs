@@ -1,18 +1,34 @@
-module Web.ResizeObserver (ResizeObserver, ResizeObserverBoxOptions(..), resizeObserver, observe, unobserve, disconnect) where
+module Web.ResizeObserver
+  ( ResizeObserver
+  , ResizeObserverBoxOptions(..)
+  , resizeObserver
+  , observe
+  , unobserve
+  , disconnect
+  ) where
 
 import Prelude
+
 import Control.Alt ((<|>))
 import Control.Monad.Except (runExcept)
 import Data.Array (singleton) as A
 import Data.Either (fromRight)
-import Data.Symbol (SProxy(..))
 import Data.Traversable (traverse)
 import Effect (Effect)
-import Effect.Uncurried (EffectFn1, EffectFn2, EffectFn3, mkEffectFn2, runEffectFn1, runEffectFn2, runEffectFn3)
+import Effect.Uncurried
+  ( EffectFn1
+  , EffectFn2
+  , EffectFn3
+  , mkEffectFn2
+  , runEffectFn1
+  , runEffectFn2
+  , runEffectFn3
+  )
 import Foreign (Foreign, readArray, readNumber)
 import Foreign.Index (readProp)
-import Prim.Row (class Union, class Nub)
+import Prim.Row (class Nub, class Union)
 import Record (merge, modify)
+import Type.Proxy (Proxy(..))
 import Web.DOM (Element)
 
 data ResizeObserverBoxOptions
@@ -72,16 +88,17 @@ normalizeEntry entry =
   , devicePixelContentBoxSize: normalizeBoxSize entry.devicePixelContentBoxSize
   }
   where
-    normalizeBoxSize boxSize =
-      fromRight [] $
-        runExcept $
-          (readArray boxSize >>= traverse readBoxSize)
+  normalizeBoxSize boxSize =
+    fromRight []
+      $ runExcept
+      $
+        (readArray boxSize >>= traverse readBoxSize)
           <|> (A.singleton <$> readBoxSize boxSize)
           <|> pure []
-    readBoxSize boxSize =
-      (\blockSize inlineSize -> { blockSize, inlineSize })
-        <$> (readProp "blockSize" boxSize >>= readNumber)
-        <*> (readProp "inlineSize" boxSize >>= readNumber)
+  readBoxSize boxSize =
+    (\blockSize inlineSize -> { blockSize, inlineSize })
+      <$> (readProp "blockSize" boxSize >>= readNumber)
+      <*> (readProp "inlineSize" boxSize >>= readNumber)
 
 resizeObserver
   :: (Array ResizeObserverEntry -> ResizeObserver -> Effect Unit)
@@ -92,19 +109,21 @@ resizeObserver =
     <<< mkEffectFn2
 
 foreign import _resizeObserver
-  :: EffectFn1 (EffectFn2 (Array (ResizeObserverEntry' Foreign)) ResizeObserver Unit) ResizeObserver
+  :: EffectFn1
+       (EffectFn2 (Array (ResizeObserverEntry' Foreign)) ResizeObserver Unit)
+       ResizeObserver
 
 observe
   :: forall sub all
    . Nub all ResizeObserverOptions
   => Union sub ResizeObserverOptions all
   => Element
-  -> Record sub
+  -> { | sub }
   -> ResizeObserver
   -> Effect Unit
 observe element =
   runEffectFn3 _observe element
-    <<< modify (SProxy :: SProxy "box") printBoxOption
+    <<< modify (Proxy :: Proxy "box") printBoxOption
     <<< flip merge { box: ContentBox }
 
 foreign import _observe
