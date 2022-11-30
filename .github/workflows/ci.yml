@@ -50,7 +50,7 @@ jobs:
           npx pulp build -- --censor-lib --strict
 
       - name: Install esbuild
-        run: npm install --no-save esbuild
+        run: npm install -g esbuild
 
       - name: Build example
         run: spago -x example.dhall bundle-app --path example/Main.purs -m Example.Main -t public/example.js
