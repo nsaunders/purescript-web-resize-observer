@@ -3,40 +3,60 @@ name: CI
 on:
   push:
     branches: [master]
+    paths-ignore: ['**.md']
   pull_request:
     branches: [master]
+    paths-ignore: ['**.md']
 
 jobs:
   build:
+    name: Build
+
     runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@v2
 
-      - uses: purescript-contrib/setup-purescript@main
-
-      - uses: actions/setup-node@v1
+      - name: Set up a PureScript toolchain
+        uses: purescript-contrib/setup-purescript@main
         with:
-          node-version: "10"
+          purescript: "unstable"
+          purs-tidy: "latest"
 
-      - name: Install dependencies
-        run: |
-          npm install -g bower
-          npm install
-          bower install --production
+      - name: Cache PureScript dependencies
+        uses: actions/cache@v2
+        with:
+          key: ${{ runner.os }}-spago-${{ hashFiles('**/*.dhall') }}
+          path: |
+            .spago
+            output
+
+      - name: Install PureScript dependencies
+        run: spago install
 
       - name: Build source
-        run: npm run-script build
-
-      - name: Install dev dependencies
-        run: bower install
+        run: spago build --no-install --purs-args '--censor-lib --strict'
 
       - name: Run tests
-        run: npm run-script test --if-present
+        run: spago test
+
+      - name: Check formatting
+        run: purs-tidy check example src test
+
+      - name: Verify Bower & Pulp
+        run: |
+          npm install bower pulp@16.0.0-0
+          npx bower install
+          npx pulp build -- --censor-lib --strict
+
+      - name: Install esbuild
+        run: npm install -g esbuild
 
       - name: Build example
-        run: npm run-script example
+        run: spago -x example.dhall bundle-app --path example/Main.purs -m Example.Main -t public/example.js
 
       - name: Publish example
+        if: github.event_name != 'pull_request'
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}

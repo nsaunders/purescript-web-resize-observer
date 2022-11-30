@@ -3,4 +3,9 @@
 /.pulp-cache/
 /output/
 /generated-docs/
+/.psc-package/
+/.psc*
+/.purs*
+/.psa*
+/.spago
 /public/example.js
