@@ -30,6 +30,7 @@ import Prim.Row (class Nub, class Union)
 import Record (merge, modify)
 import Type.Proxy (Proxy(..))
 import Web.DOM (Element)
+import Web.DOM.Element (DOMRect)
 
 data ResizeObserverBoxOptions
   = BorderBox
@@ -43,17 +44,6 @@ printBoxOption = case _ of
   DevicePixelContentBox -> "device-pixel-content-box"
 
 type ResizeObserverOptions = (box :: ResizeObserverBoxOptions)
-
-type DOMRect =
-  { bottom :: Number
-  , height :: Number
-  , left :: Number
-  , right :: Number
-  , top :: Number
-  , width :: Number
-  , x :: Number
-  , y :: Number
-  }
 
 type ResizeObserverSize =
   { blockSize :: Number
