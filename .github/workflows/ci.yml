@@ -61,7 +61,7 @@ jobs:
           pulp build -- --censor-lib --strict
 
       - name: Build example
-        run: spago -x example.dhall bundle-app --path example/Main.purs -m Example.Main -t public/example.js
+        run: spago -x example.dhall bundle-app --path example/Main.purs -m Example.Main -t public/example.js -y
 
       - name: Publish example
         if: github.event_name != 'pull_request'
