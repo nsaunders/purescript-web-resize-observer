@@ -711,6 +711,7 @@
   }
 
   // output/Web.ResizeObserver/foreign.js
+  "use strict";
   function _resizeObserver(callback) {
     return new ResizeObserver(callback);
   }
