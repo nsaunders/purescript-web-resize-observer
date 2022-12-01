@@ -3,7 +3,6 @@
 , repository = "https://github.com/nsaunders/purescript-web-resize-observer"
 , dependencies =
   [ "arrays"
-  , "console"
   , "control"
   , "effect"
   , "either"
@@ -15,5 +14,5 @@
   , "web-dom"
   ]
 , packages = ./packages.dhall
-, sources = [ "src/**/*.purs", "test/**/*.purs" ]
+, sources = [ "src/**/*.purs" ]
 }

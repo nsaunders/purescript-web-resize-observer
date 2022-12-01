@@ -1,0 +1,9 @@
+{
+  "devDependencies": {
+    "bower": "*",
+    "esbuild": "0.13.12",
+    "file-url": "^4.0.0",
+    "pulp": "16.0.0-0",
+    "puppeteer": "^19.3.0"
+  }
+}

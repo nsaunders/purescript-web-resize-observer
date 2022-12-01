@@ -23,6 +23,9 @@ jobs:
           purescript: "unstable"
           purs-tidy: "latest"
 
+      - name: Check formatting
+        run: purs-tidy check example src test
+
       - name: Cache PureScript dependencies
         uses: actions/cache@v2
         with:
@@ -31,26 +34,31 @@ jobs:
             .spago
             output
 
+      - name: Cache Node.js dependencies
+        uses: actions/cache@v2
+        with:
+          key: ${{ runner.os }}-npm-${{ hashFiles('package-lock.json') }}
+          path: node_modules
+
       - name: Install PureScript dependencies
         run: spago install
 
       - name: Build source
         run: spago build --no-install --purs-args '--censor-lib --strict'
 
-      - name: Run tests
-        run: spago test
+      - name: Install Node.js dependencies
+        run: npm ci
 
-      - name: Check formatting
-        run: purs-tidy check example src test
+      - name: Add Node.js dependencies to GITHUB_PATH
+        run: echo "$GITHUB_WORKSPACE/node_modules/.bin" >> $GITHUB_PATH
+
+      - name: Run tests
+        run: spago -x test.dhall test
 
       - name: Verify Bower & Pulp
         run: |
-          npm install bower pulp@16.0.0-0
-          npx bower install
-          npx pulp build -- --censor-lib --strict
-
-      - name: Install esbuild
-        run: npm install -g esbuild
+          bower install
+          pulp build -- --censor-lib --strict
 
       - name: Build example
         run: spago -x example.dhall bundle-app --path example/Main.purs -m Example.Main -t public/example.js
