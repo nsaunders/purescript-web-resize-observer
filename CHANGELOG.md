@@ -12,7 +12,7 @@ Bugfixes:
 
 Other improvements:
 
-## [2.0.0] - 2022-12-01
+## [2.0.0] - 2022-12-02
 
 Breaking changes:
 - PureScript 0.15 migration
