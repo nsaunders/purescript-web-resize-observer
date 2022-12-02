@@ -15,7 +15,7 @@ let
   }) {inherit pkgs;};
 in
   pkgs.stdenv.mkDerivation {
-    name = "tecton";
+    name = "web-resize-observer";
     buildInputs = with pursPkgs; [
       purs
       spago
