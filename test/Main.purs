@@ -2,14 +2,24 @@ module Test.Main where
 
 import Prelude
 
+import Ansi.Codes (Color(..))
+import Ansi.Output (foreground, withGraphics)
+import Control.Monad.Writer.Trans (WriterT, execWriterT, tell)
+import Data.Array.NonEmpty (head)
+import Data.Bifunctor (lmap, rmap)
+import Data.Either (Either(..), either, isLeft, note)
+import Data.Either.Nested (type (\/))
+import Data.Foldable (foldr)
 import Data.Maybe (Maybe(..))
 import Data.Number.Format as Number
 import Data.Posix.Signal as Signal
-import Data.String (Pattern(..))
-import Data.String as String
+import Data.String.Regex (match, regex)
+import Data.String.Regex.Flags (multiline)
 import Data.Traversable (for_)
+import Data.Tuple.Nested ((/\))
 import Effect (Effect)
 import Effect.Aff (Aff, launchAff_, throwError)
+import Effect.Aff.Class (liftAff)
 import Effect.Class (liftEffect)
 import Effect.Console as Console
 import Effect.Exception (error)
@@ -18,9 +28,8 @@ import Node.ChildProcess as CP
 import Node.Encoding (Encoding(..))
 import Node.FS.Aff (rmdir, unlink, writeTextFile)
 import Node.Path as Path
-import Node.Process (cwd)
+import Node.Process (cwd, exit)
 import Sunde as S
-import Test.Assert (assert')
 import Toppokki as T
 
 main :: Effect Unit
@@ -58,23 +67,58 @@ main = launchAff_ do
   url <- liftEffect $ T.URL <$> fileURL html
   T.goto url page
   _ <- T.pageWaitForSelector (T.Selector "div") {} page
-  assertWidthDisplayed defaultViewport.width page
-  for_ [ 360.0, 1024.0, 1920.0 ] \width -> do
-    T.setViewport defaultViewport { width = width } page
-    assertWidthDisplayed width page
+  results <-
+    execWriterT do
+      runTest defaultViewport.width page
+      for_ [ 360.0, 1024.0, 1920.0 ] \width -> do
+        liftAff $ T.setViewport defaultViewport { width = width } page
+        runTest width page
+  let
+    failed /\ passed =
+      foldr (\x -> (if isLeft x then lmap else rmap) (_ + 1)) (0 /\ 0) results
+  liftEffect
+    $ Console.log
+    $
+      if failed == 0 then green ("\n" <> show passed <> " test(s) passed")
+      else red ("\n" <> show failed <> " test(s) failed")
   T.close browser
   unlink html
   unlink js
   rmdir tmp
+  when (failed /= 0) $ liftEffect $ exit 1
 
-assertWidthDisplayed :: Number -> T.Page -> Aff Unit
-assertWidthDisplayed width page = do
-  actual <- T.content page
-  let expected = Number.toString width <> "px"
-  liftEffect $
-    assert'
-      ("Width of " <> expected <> " should be displayed.")
-      (String.contains (Pattern expected) actual)
+runTest :: Number -> T.Page -> WriterT (Array (String \/ String)) Aff Unit
+runTest width page = do
+  content <- liftAff $ T.content page
+  let
+    result =
+      lmap (const $ red "✘ Bad regex") (regex "[0-9\\.]+px" multiline)
+        >>= flip match content >>> note (red "✘ Value not found")
+        >>= head >>> case _ of
+          Nothing ->
+            Left $ red "✘ No matching value"
+          Just actual ->
+            let
+              expected = Number.toString width <> "px"
+            in
+              if actual == expected then
+                Right $ green $ "✓ Found expected value \"" <> actual <> "\""
+              else
+                Left
+                  $ red
+                  $ "✘ Expected value \""
+                      <> expected
+                      <> "\", but found \""
+                      <> actual
+                      <> "\""
+  liftEffect $ Console.log $ either identity identity result
+  tell [ result ]
+
+red :: String -> String
+red = withGraphics $ foreground Red
+
+green :: String -> String
+green = withGraphics $ foreground Green
 
 defaultViewport :: { | T.DefaultViewPort }
 defaultViewport =

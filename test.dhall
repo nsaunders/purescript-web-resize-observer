@@ -5,7 +5,8 @@ in conf // {
   dependencies =
     conf.dependencies #
       [ "aff"
-      , "assert"
+      , "ansi"
+      , "bifunctors"
       , "console"
       , "exceptions"
       , "maybe"
@@ -19,5 +20,6 @@ in conf // {
       , "strings"
       , "sunde"
       , "toppokki"
+      , "tuples"
       ]
 }

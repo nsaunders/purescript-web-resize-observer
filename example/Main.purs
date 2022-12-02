@@ -34,13 +34,13 @@ main = do
         setAttribute
           "style"
           """
-            height:100px;
+            height:2.5em;
             background:#000;
             color:#fff;
             display:flex;
             align-items:center;
             justify-content:center;
-            font:48px sans-serif;
+            font:3rem sans-serif;
           """
       let
         outputWidth w =
