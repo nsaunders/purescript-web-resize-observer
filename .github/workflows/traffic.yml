@@ -20,7 +20,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - uses: nsaunders/traffic-lite
+      - uses: nsaunders/traffic-lite@v0.1.0
         with:
           path: ${{ env.TRAFFIC_PATH }}
           repo: ${{ env.GITHUB_REPOSITORY }}

@@ -3,10 +3,28 @@ name: CI
 on:
   push:
     branches: [master]
-    paths-ignore: ['**.md']
+    paths:
+      - 'example/**/*.purs'
+      - 'example/**/*.js'
+      - 'src/**/*.purs'
+      - 'src/**/*.js'
+      - 'test/**/*.purs'
+      - 'test/**/*.js'
+      - '*.json'
+      - '*.dhall'
+      - '.github/workflows/ci.yml'
   pull_request:
     branches: [master]
-    paths-ignore: ['**.md']
+    paths:
+      - 'example/**/*.purs'
+      - 'example/**/*.js'
+      - 'src/**/*.purs'
+      - 'src/**/*.js'
+      - 'test/**/*.purs'
+      - 'test/**/*.js'
+      - '*.json'
+      - '*.dhall'
+      - '.github/workflows/ci.yml'
 
 jobs:
   build:
