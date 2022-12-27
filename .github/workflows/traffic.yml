@@ -23,7 +23,7 @@ jobs:
       - uses: nsaunders/traffic-lite@v0.1.2
         with:
           path: ${{ env.TRAFFIC_PATH }}
-          repo: ${{ env.GITHUB_REPOSITORY }}
+          repo: ${{ github.repository }}
           token: ${{ secrets.GH_ACCESS_TOKEN }}
 
       - name: Commit update
