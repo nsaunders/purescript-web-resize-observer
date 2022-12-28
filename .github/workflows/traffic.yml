@@ -2,7 +2,8 @@ name: Traffic
 
 on:
   push:
-    branches: [master]
+    branches:
+      - master
     paths:
       - '.github/workflows/traffic.yml'
   schedule: 
