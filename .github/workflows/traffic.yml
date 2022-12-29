@@ -27,8 +27,7 @@ jobs:
           repo: ${{ github.repository }}
           token: ${{ secrets.GH_ACCESS_TOKEN }}
 
-      - name: Commit update
-        uses: EndBug/add-and-commit@v9
+      - uses: EndBug/add-and-commit@v9
         with:
           add: ${{ env.TRAFFIC_PATH }}
           author_name: GitHub Actions
