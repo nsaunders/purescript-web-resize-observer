@@ -118,12 +118,20 @@
   {
     "views": {
       "uniques": 1,
-      "count": 4
+      "count": 30
     },
     "timestamp": "2022-12-28T00:00:00Z",
     "clones": {
-      "uniques": 1,
-      "count": 1
+      "uniques": 3,
+      "count": 5
+    }
+  },
+  {
+    "views": null,
+    "timestamp": "2022-12-29T00:00:00Z",
+    "clones": {
+      "uniques": 3,
+      "count": 4
     }
   }
 ]
