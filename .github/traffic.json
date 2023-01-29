@@ -363,11 +363,38 @@
     }
   },
   {
-    "views": null,
+    "views": {
+      "uniques": 1,
+      "count": 4
+    },
     "timestamp": "2023-01-26T00:00:00Z",
     "clones": {
+      "uniques": 6,
+      "count": 26
+    }
+  },
+  {
+    "views": null,
+    "timestamp": "2023-01-27T00:00:00Z",
+    "clones": {
+      "uniques": 1,
+      "count": 1
+    }
+  },
+  {
+    "views": null,
+    "timestamp": "2023-01-28T00:00:00Z",
+    "clones": {
       "uniques": 3,
-      "count": 4
+      "count": 3
+    }
+  },
+  {
+    "views": null,
+    "timestamp": "2023-01-29T00:00:00Z",
+    "clones": {
+      "uniques": 2,
+      "count": 7
     }
   }
 ]
