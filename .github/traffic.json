@@ -1003,8 +1003,67 @@
     "views": null,
     "timestamp": "2023-04-23T00:00:00Z",
     "clones": {
-      "uniques": 2,
-      "count": 2
+      "uniques": 5,
+      "count": 7
+    }
+  },
+  {
+    "views": null,
+    "timestamp": "2023-04-24T00:00:00Z",
+    "clones": {
+      "uniques": 4,
+      "count": 18
+    }
+  },
+  {
+    "views": null,
+    "timestamp": "2023-04-25T00:00:00Z",
+    "clones": {
+      "uniques": 4,
+      "count": 8
+    }
+  },
+  {
+    "views": null,
+    "timestamp": "2023-04-26T00:00:00Z",
+    "clones": {
+      "uniques": 6,
+      "count": 6
+    }
+  },
+  {
+    "views": null,
+    "timestamp": "2023-04-27T00:00:00Z",
+    "clones": {
+      "uniques": 15,
+      "count": 15
+    }
+  },
+  {
+    "views": {
+      "uniques": 1,
+      "count": 3
+    },
+    "timestamp": "2023-04-28T00:00:00Z",
+    "clones": {
+      "uniques": 1,
+      "count": 1
+    }
+  },
+  {
+    "views": null,
+    "timestamp": "2023-04-29T00:00:00Z",
+    "clones": {
+      "uniques": 3,
+      "count": 3
+    }
+  },
+  {
+    "views": null,
+    "timestamp": "2023-04-30T00:00:00Z",
+    "clones": {
+      "uniques": 1,
+      "count": 1
     }
   }
 ]
