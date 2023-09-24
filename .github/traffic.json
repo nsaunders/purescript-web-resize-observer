@@ -2029,8 +2029,48 @@
     "views": null,
     "timestamp": "2023-09-17T00:00:00Z",
     "clones": {
+      "uniques": 6,
+      "count": 6
+    }
+  },
+  {
+    "views": null,
+    "timestamp": "2023-09-18T00:00:00Z",
+    "clones": {
+      "uniques": 3,
+      "count": 3
+    }
+  },
+  {
+    "views": null,
+    "timestamp": "2023-09-19T00:00:00Z",
+    "clones": {
       "uniques": 2,
       "count": 2
+    }
+  },
+  {
+    "views": null,
+    "timestamp": "2023-09-20T00:00:00Z",
+    "clones": {
+      "uniques": 19,
+      "count": 21
+    }
+  },
+  {
+    "views": null,
+    "timestamp": "2023-09-21T00:00:00Z",
+    "clones": {
+      "uniques": 1,
+      "count": 1
+    }
+  },
+  {
+    "views": null,
+    "timestamp": "2023-09-22T00:00:00Z",
+    "clones": {
+      "uniques": 3,
+      "count": 3
     }
   }
 ]
