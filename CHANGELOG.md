@@ -12,13 +12,21 @@ Bugfixes:
 
 Other improvements:
 
+## [2.1.0] - 2023-11-24
+
+New features:
+
+- Expose `ResizeObserverEntry`, `ResizeObserverEntry'`, and `ResizeObserverSize` types. (#5 by @paluh)
+
 ## [2.0.0] - 2022-12-02
 
 Breaking changes:
+
 - PureScript 0.15 migration
 - `DOMRect` type removed in favor of `DOMRect` from `purescript-web-dom`
 
 Other improvements:
+
 - Spago migration
 - CI workflow improvements
 - Improved number display in example app
