@@ -1,6 +1,9 @@
 module Web.ResizeObserver
   ( ResizeObserver
   , ResizeObserverBoxOptions(..)
+  , ResizeObserverEntry
+  , ResizeObserverEntry'
+  , ResizeObserverSize
   , resizeObserver
   , observe
   , unobserve
